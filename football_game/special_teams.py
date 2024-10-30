@@ -131,10 +131,10 @@ def call_special_play(user, touchdown=False):
             com_choice = OPTIONS[com_choice]
 
             if com_choice == "Punt":
-                com_choice = random.randint(1, 4)
+                com_choice = random.randint(1, 3)
                 com_choice = PUNT_PLAYS[com_choice]
             elif com_choice == "Field Goal":
-                com_choice = random.randint(1, 4)
+                com_choice = random.randint(1, 2)
                 com_choice = FIELD_GOAL_PLAYS[com_choice]
             
         prob = special_teams_probability(user, com_choice)
