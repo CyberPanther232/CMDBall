@@ -69,16 +69,7 @@ def evaluate_play_success(probability):
         return False
 
 # Type is the type of play called by the user, Com_Type is the type of play called by the Computer
-def run_play(type, probability, com_type, com_probability, computer, possession, count):
-
-    if DOWNS[count] == "4th" and possession == computer.team.name:
-        kicking = com_type
-        receiving = type
-    
-    elif DOWNS[count] == "4th":
-        kicking = type
-        receiving = com_type
-
+def run_play(type, probability, com_type, com_probability, computer, possession):
 
     if possession == computer.team.name:
         offense = com_type
@@ -253,11 +244,15 @@ def run_game(game_number, player) -> str:
                 if com.team.name == possession and DOWNS[count] != "4th":
                     com_play, com_probability = call_offensive_play(com)
                     play, probability = call_defensive_play(player)
+                    yards = run_play(play, probability, com_play, com_probability, com, possession)
+                    possession, extra, turnover = random_factors(player, com, possession)
                     count += 1
                 
                 elif player.team.name == possession and DOWNS[count] != "4th":
                     play, probability = call_offensive_play(player)
                     com_play, com_probability = call_defensive_play(com)
+                    yards = run_play(play, probability, com_play, com_probability, com, possession)
+                    possession, extra, turnover = random_factors(player, com, possession)
                     count += 1
 
                 elif com.team.name == possession and DOWNS[count] == "4th":
@@ -265,15 +260,14 @@ def run_game(game_number, player) -> str:
                     play = ""
                     probability = 0
                     count = 1
+                    possession = player.team.name
                 
                 elif player.team.name == possession and DOWNS[count] == "4th":
                     play, probability = call_special_play(player)
                     com_play = 0
                     com_probability = 0
                     count = 1
-
-                yards = run_play(play, probability, com_play, com_probability, com, possession)
-                possession, extra, turnover = random_factors(player, com, possession)
+                    possession = com.team.name
                 
                 print(possession, extra)
 

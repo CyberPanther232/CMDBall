@@ -21,19 +21,19 @@ EXTRA_POINT_PLAYS = {1 : "Field Goal", 2 : "Two-Point Conversion"}
 def special_teams_probability(user, value) -> float:
     
     if value == "High Punt":
-        return float(((int(user.team.special_teams.punt) * OVERALL_SPEC_PERC) - (HIGH_PUNT_LEVEL * SPECIAL_RISK) / 40))
+        return float(((int(user.team.special_teams.punt) * OVERALL_SPEC_PERC) - (HIGH_PUNT_LEVEL * SPECIAL_RISK)) / 40)
     elif value == "Low Punt":
-        return float(((int(user.team.special_teams.punt) * OVERALL_SPEC_PERC) - (LOW_PUNT_LEVEL * SPECIAL_RISK) / 40))
+        return float(((int(user.team.special_teams.punt) * OVERALL_SPEC_PERC) - (LOW_PUNT_LEVEL * SPECIAL_RISK)) / 40)
     elif value == "Fake Punt":
-        return float(((int(user.team.special_teams.overall) * OVERALL_SPEC_PERC) - (FAKE_PUNT_LEVEL * SPECIAL_RISK) / 40))
+        return float(((int(user.team.special_teams.overall) * OVERALL_SPEC_PERC) - (FAKE_PUNT_LEVEL * SPECIAL_RISK)) / 40)
     elif value == "Field Goal Attempt":
-        return float(((int(user.team.special_teams.field_goal) * OVERALL_SPEC_PERC) - (FIELD_GOAL_LEVEL * SPECIAL_RISK) / 40))
+        return float(((int(user.team.special_teams.field_goal) * OVERALL_SPEC_PERC) - (FIELD_GOAL_LEVEL * SPECIAL_RISK)) / 40)
     elif value == "Fake Field Goal":
-        return float(((int(user.team.special_teams.overall) * OVERALL_SPEC_PERC) - (FAKE_FG_LEVEL * SPECIAL_RISK) / 40))
+        return float(((int(user.team.special_teams.overall) * OVERALL_SPEC_PERC) - (FAKE_FG_LEVEL * SPECIAL_RISK)) / 40)
     elif value == "Field Goal":
-        return float(((int(user.team.special_teams.field_goal) * OVERALL_SPEC_PERC) - (EXTRA_POINT_LEVEL * SPECIAL_RISK) / 40))
+        return float(((int(user.team.special_teams.field_goal) * OVERALL_SPEC_PERC) - (EXTRA_POINT_LEVEL * SPECIAL_RISK)) / 40)
     elif value == "Two-Point Conversion":
-        return float(((int(user.team.offense.overall) * OVERALL_SPEC_PERC) - (TWO_CONV_LEVEL * SPECIAL_RISK) / 40))
+        return float(((int(user.team.offense.overall) * OVERALL_SPEC_PERC) - (TWO_CONV_LEVEL * SPECIAL_RISK)) / 40)
 
 
 def call_special_play(user, touchdown=False):
@@ -48,7 +48,7 @@ def call_special_play(user, touchdown=False):
                 try:
                     play = int(input("Enter option as a number: "))
 
-                    if play < 0 or play > 3:
+                    if play < 0 or play > 2:
                         print("Invalid option... Please try again!")
                     else:
                         choice = EXTRA_POINT_PLAYS[play]
@@ -88,7 +88,7 @@ def call_special_play(user, touchdown=False):
                 try:
                     play = int(input("Enter option as a number: "))
 
-                    if play < 0 or play > 3:
+                    if play < 0 or play > 2:
                         print("Invalid option... Please try again!")
                     else:
                         choice = PUNT_PLAYS[play]
@@ -106,7 +106,7 @@ def call_special_play(user, touchdown=False):
                 try:
                     play = int(input("Enter option as a number: "))
 
-                    if play < 0 or play > 3:
+                    if play < 0 or play > 2:
                         print("Invalid option... Please try again!")
                     else:
                         choice = FIELD_GOAL_PLAYS[play]
@@ -127,7 +127,7 @@ def call_special_play(user, touchdown=False):
             com_choice = EXTRA_POINT_PLAYS[com_choice]
 
         else:
-            com_choice = random.randint(1, 3)
+            com_choice = random.randint(1, 2)
             com_choice = OPTIONS[com_choice]
 
             if com_choice == "Punt":
