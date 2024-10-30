@@ -195,11 +195,14 @@ def run_game(game_number, player) -> str:
 
     return_distance = kickoff_return(player, com, possession)
 
+    # Sets territory and yardline
     yardline = 50 - int(distance) + return_distance
     territory = "own"
 
+    # Display kick distance
     print(f"Kick Distance: {distance} | Return Distance: {return_distance} | Yardline: {yardline}")
 
+    # Test for touchback
     if int(distance) - 50 > 0 and yardline < 100:
         print(f"Touchback! The {name_translation(possession)} will start it at the 30 yard line!")
         yardline = 30
@@ -262,12 +265,14 @@ def run_game(game_number, player) -> str:
                 yards = run_play(play, probability, com_play, com_probability, com, possession)
                 possession, extra, turnover = random_factors(player, com, possession)
                 
+                print(possession, extra)
+
                 if territory == "own" and yardline < 50:
-                    yardline = yardline + (yards + extra)
+                    yardline = yardline - (yards + extra if extra > 0 else -extra)
                     yards_to_gain = yards_to_gain + (yards + extra)
 
                 elif territory == "opposing":
-                    yardline = yardline - (yards + extra)
+                    yardline = yardline + (yards + extra if extra > 0 else -extra)
 
                 if turnover:
                     print(f"The {possession} take over from the {yardline} yardline!")
