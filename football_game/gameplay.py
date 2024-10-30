@@ -17,7 +17,7 @@ PLAY_RANGES = {"Short Pass" : (5, 15),"Deep Pass" : (16, 60),"Hail Mary" : (40, 
                "Screen Pass" : (0, 5),"Inside Run" : (1, 15),"Outside Run" : (1, 15),
                "Flea-Flicker" : (5, 45), "QB Kneel" : (-2, -2), "Fake Pass" : (1, 15),
                "QB Toss" : (0, 15), "QB Sneak" : (1, 5), "Man-Coverage" : (-1, -10),
-               "Zone-Coverage" : (-1, -10), "Blitz" : (-5, -15)}
+               "Zone-Coverage" : (-1, -10), "Blitz" : (-5, -15), "Field Goal Attempt" : (15, 40)}
 
 # Risks Percentages
 TURNOVER_RISK = .05
