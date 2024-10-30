@@ -54,7 +54,7 @@ def random_factors(player, computer, possession):
 
         else:
             extra = random.choice(range(-1,-10, -1))
-            print(f"The defense pushed the offense back another {extra} yards!")
+            print(f"The defense pushed the offense back {abs(extra)} yards!")
             return possession, extra, False
 
 def evaluate_play_success(probability):
@@ -267,7 +267,7 @@ def run_game(game_number, player) -> str:
                     yards_to_gain = yards_to_gain + (yards + extra)
 
                 elif territory == "opposing":
-                    yardline = yardline - (yards - extra)
+                    yardline = yardline - (yards + extra)
 
                 if turnover:
                     print(f"The {possession} take over from the {yardline} yardline!")
@@ -295,4 +295,4 @@ def run_game(game_number, player) -> str:
 
                 
 
-run_game("1", Player('test', Team('CAR', Offense(90, 90), Defense(90, 90, 90), Special_Teams(90, 90, 90)), '0 -- 0'))
+run_game("1", Player('test', Team('GGG', Offense(90, 90), Defense(90, 90, 90), Special_Teams(90, 90, 90)), '0 -- 0'))
