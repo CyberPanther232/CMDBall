@@ -1,5 +1,5 @@
 Game_Number | Home | Away |
-1 | SST | GGG |
+1 | SCT | GGG |
 2 | DH | GGG |
 3 | GB | GGG |
 4 | WW | GGG |

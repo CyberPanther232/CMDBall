@@ -17,7 +17,9 @@ PLAY_RANGES = {"Short Pass" : (5, 15),"Deep Pass" : (16, 60),"Hail Mary" : (40, 
                "Screen Pass" : (0, 5),"Inside Run" : (1, 15),"Outside Run" : (1, 15),
                "Flea-Flicker" : (5, 45), "QB Kneel" : (-2, -2), "Fake Pass" : (1, 15),
                "QB Toss" : (0, 15), "QB Sneak" : (1, 5), "Man-Coverage" : (-1, -10),
-               "Zone-Coverage" : (-1, -10), "Blitz" : (-5, -15), "Field Goal Attempt" : (15, 40)}
+               "Zone-Coverage" : (-1, -10), "Blitz" : (-5, -15), "Field Goal Attempt" : (15, 60),
+               "Low Punt" : (10, 50), "High Punt" : (15, 60), "Field Goal" : (10, 30), "Two-Point Conversion" : (5, 25),
+               "Fake Field Goal" : (5, 15), "Fake Punt" : (5, 15)}
 
 # Risks Percentages
 TURNOVER_RISK = .05
@@ -67,7 +69,16 @@ def evaluate_play_success(probability):
         return False
 
 # Type is the type of play called by the user, Com_Type is the type of play called by the Computer
-def run_play(type, probability, com_type, com_probability, computer, possession):
+def run_play(type, probability, com_type, com_probability, computer, possession, count):
+
+    if DOWNS[count] == "4th" and possession == computer.team.name:
+        kicking = com_type
+        receiving = type
+    
+    elif DOWNS[count] == "4th":
+        kicking = type
+        receiving = com_type
+
 
     if possession == computer.team.name:
         offense = com_type
@@ -98,7 +109,6 @@ def run_play(type, probability, com_type, com_probability, computer, possession)
         loss = min(PLAY_RANGES[defense])
 
     return yardage - loss
-
 
 def run_game(game_number, player) -> str:
     with open('season_schedule.txt', 'r') as season:
