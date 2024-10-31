@@ -29,13 +29,12 @@ TEAMS_IN_PLAYOFF = 12
 
 def generate_teams() -> None:
 
-    teams = ["CAR", "HOU", "NO", "ATL", "TB",
-                "LAR", "LAC", "KC", "LV", "DEN",
-                "NYG", "NYJ", "GB", "MIA", "JAX",
-                "CIN", "CLE", "ARI", "SF", "DAL",
-                "DET", "MIN", "CHI", "NE", "PIT",
-                "TEN", "BAL", "WAS", "BUF", "PHI",
-                "IND", "SEA"]
+    teams = ["BRB", "DH", "ICP", "NW", "SS",
+             "GGG", "PR", "MT", "EE", "SCT",
+             "CCD", "GB", "CCU", "RCR", "FBF",
+             "VVI", "CCH", "WW", "MM", "HH",
+             "NN", "SST", "VV", "PP", "TVT",
+             "FF", "SRS", "TT", "CCY"]
 
     with open('team_data.csv', 'w') as datafile:
         datafile.write('Team_Name,Passing_Rating,Rushing_Rating,Offensive_Rating,Zone_Rating,Man_Rating,Blitz_Rating,Defensive_Rating,Kickoff_Rating,Punt_Rating,Field_Goal_Rating,Special_Teams_Rating,Overall_Rating\n')
@@ -66,38 +65,51 @@ def generate_teams() -> None:
     print("Teams created! Data saved!")
 
 def name_translation(abbrv) -> str:
-    team_names = {"CAR":"Carolina Panthers","HOU":"Houston Texans","NO":"New Orleans Saints","ATL":"Atlanta Falcons","TB":"Tampa Bay Buccanneers",
-                "LAR":"Los Angeles Rams","LAC":"Los Angeles Chargers","KC":"Kansas City Chiefs","LV":"Las Vegas Raiders","DEN":"Denver Broncos",
-                "NYG":"New York Giants","NYJ":"New York Jets","GB":"Green Bay Packers","MIA":"Miami Dolphins","JAX":"Jacksonville Jaguars",
-                "CIN":"Cinninati Bengals","CLE":"Cleveland Browns","ARI":"Arizona Cardinals","SF":"San Francisco 49ers","DAL":"Dallas Cowboys",
-                "DET":"Detroit Lions","MIN":"Minnesota Vikings","CHI":"Chicago Bears","NE":"New England Patriots","PIT":"Pittsburgh Steelers",
-                "TEN":"Tennessee Titans","BAL":"Baltimore Ravens","WAS":"Washington Commanders","BUF":"Buffalo Bills","PHI":"Philadelphia Eagles",
-                "IND":"Indianapolis Colts","SEA":"Seattle Seahawks"}
-    
+    team_names = {
+        "BRB": "Blue Ridge Brawlers", "DH": "Desert Hawks", "ICP": "Ironclad Pirates",
+        "NW": "Northern Wolves", "SS": "Savannah Storm", "GGG": "Golden Gate Guardians",
+        "PR": "Pacific Raiders", "MT": "Midwest Thunderbirds", "EE": "Eastern Eagles",
+        "SCT": "Steel City Titans", "CCD": "Capitol Crusaders", "GB": "Glacier Bears",
+        "CCU": "Canyon Cougars", "FBF": "Fireball Falcons", "VVI": "Valley Vipers",
+        "CCH": "Coastal Crushers", "RCR": "River City Rattlers", "WW": "Wilderness Wolves",
+        "MM": "Mountain Men", "HH": "Horizon Hornets", "NN": "Nomad Navigators",
+        "SST": "Starlight Stallions", "VV": "Vortex Vultures", "PP": "Phantom Phantoms",
+        "TVT": "Thunder Valley Titans", "FF": "Fusion Flames", "SRS": "Steel River Sentries",
+        "TT": "Titanium Tridents", "CCY": "Crimson Cyclones", "SSV": "Solar Savages", "TWT": "Twilight Tigers",
+        "SSH" : "Savage Sharks"
+    }
+
     return team_names[abbrv]
 
 def stadium_translation(abbrv):
-    stadiums = {"CAR":"Bank of America Stadium","HOU":"NRG Stadium","NO":"Caesars Superdome","ATL":"Mercedes-Benz Superdome","TB":"Raymond James Stadium",
-                "LAR":"SoFi Stadium","LAC":"SoFi Stadium","KC":"Arrowhead Stadium","LV":"Alligiant Stadium","DEN":"Empower Field at MileHigh",
-                "NYG":"MetLife Stadium","NYJ":"MetLife Stadium","GB":"Lambeau Field","MIA":"Hard Rock Stadium","JAX":"EverBank Stadium",
-                "CIN":"Paycor Stadium","CLE":"Huntington Bank Field","ARI":"State Farm Stadium","SF":"Levi's Stadium","DAL":"AT&T Stadium",
-                "DET":"Ford Field","MIN":"U.S. Bank Stadium","CHI":"Soldier Field","NE":"Gillette Stadium","PIT":"Acrisure Stadium",
-                "TEN":"Nissan Stadium","BAL":"M&T Bank Stadium","WAS":"Northwest Stadium","BUF":"Highmark Stadium","PHI":"Lincoln Financial Field",
-                "IND":"Lucas Oil Stadium","SEA":"Lumen Field"}
-    
+    stadiums = {
+        "BRB": "Mountain View Arena", "DH": "Sunstone Stadium", "ICP": "Blacksmith Field",
+        "NW": "Frostbite Dome", "SS": "Thunderwave Stadium", "GGG": "Bayfront Coliseum",
+        "PR": "Oceanview Park", "MT": "Heartland Arena", "EE": "Skyhigh Stadium",
+        "SCT": "Ironworks Stadium", "CCD": "Liberty Field", "GB": "Iceberg Arena",
+        "CCU": "Rockslide Stadium", "FBF": "Ember Field", "VVI": "Serpent's Nest",
+        "CCH": "Shoreline Stadium", "RCR": "Wetlands Park", "WW": "Timberline Stadium",
+        "MM": "Summit Arena", "HH": "Skyview Stadium", "NN": "Voyager Field",
+        "SST": "Celestial Arena", "VV": "Vulture Stadium", "PP": "Spectral Field",
+        "TVT": "Stormwatch Stadium", "FF": "Inferno Arena", "SRS": "Fortress Field",
+        "TT": "Ocean Depths Stadium", "CCY": "Cyclone Field", "SSV" : "Radiance Stadium",
+        "TWT": "Dusk Dome", "SSH" : "Deep Blue Arena"
+    }
+
     return stadiums[abbrv]
+
 
 def create_schedule(team) -> list:
 
     divisions = []
-    divisions.append(['AFC NORTH', 'BAL', 'PIT', 'CIN', 'CLE'])
-    divisions.append(['AFC SOUTH', 'HOU', 'IND', 'TEN', 'JAX'])
-    divisions.append(['AFC EAST', 'BUF', 'MIA', 'NE', 'NYJ'])
-    divisions.append(['AFC WEST', 'KC', 'LAC', 'DEN', 'LV'])
-    divisions.append(['NFC NORTH', 'MIN', 'DET', 'CHI', 'GB'])
-    divisions.append(['NFC SOUTH', 'CAR', 'NO', 'ATL', 'TB'])
-    divisions.append(['NFC EAST', 'NYG', 'PHI', 'DAL', 'WAS'])
-    divisions.append(['NFC WEST', 'SF', 'SEA', 'ARI', 'LAR'])
+    divisions.append(['PAC NORTH', 'DH', 'ICP', 'NW', 'SS'])
+    divisions.append(['PAC SOUTH', 'GGG', 'PR', 'MT', 'EE'])
+    divisions.append(['PAC EAST', 'SCT', 'CCD', 'GB', 'CCU'])
+    divisions.append(['PAC WEST', 'FBF', 'VVI', 'CCH', 'RCR'])
+    divisions.append(['ATL NORTH', 'WW', 'MM', 'HH', 'NN'])
+    divisions.append(['ATL SOUTH', 'SST', 'VV', 'PP', 'TVT'])
+    divisions.append(['ATL EAST', 'FF', 'SRS', 'TT', 'CCY'])
+    divisions.append(['ATL WEST', 'BRB', 'TWT', 'SSV', 'SSH'])
 
     for div in divisions:
         if team in div[1:]:
